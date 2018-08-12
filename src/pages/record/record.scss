@@ -17,4 +17,12 @@ page-record {
     line-height: 35vw;
     border-radius: 50%;
   }
+
+  ion-toolbar {
+    text-align: center;
+  }
+
+  button {
+    min-width: 48%;
+  }
 }

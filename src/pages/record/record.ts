@@ -1,9 +1,11 @@
+import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { Component } from '@angular/core';
+import { HomePage } from '../home/home';
 import { Media } from '../../model/media.model';
 import { MediaStorageService } from '../../services/media-storage.service';
+import { Observable } from 'rxjs';
 import Recorder from 'recorder-js';
 
 /**
@@ -18,17 +20,29 @@ import Recorder from 'recorder-js';
   selector: 'page-record',
   templateUrl: 'record.html',
 })
-export class RecordPage {
+export class RecordPage implements OnInit {
+
+  audioContext: AudioContext;
+  recorderStatuses: typeof RecorderStatuses;
 
   recorder: any;
-  audioContext: AudioContext;
+  currentStatus: RecorderStatuses;
+
   blob: Blob;
   blobUrl: SafeUrl;
 
-  constructor(private sanitizer: DomSanitizer, private mediaStorage: MediaStorageService) { }
+  timeElapsed: Observable<number>;
+
+  constructor(
+    private sanitizer: DomSanitizer,
+    private mediaStorage: MediaStorageService,
+    public navCtrl: NavController
+  ) { }
 
   ngOnInit() {
-    this.audioContext = new AudioContext
+    this.audioContext = new AudioContext;
+    this.currentStatus = RecorderStatuses.NotStarted;
+    this.recorderStatuses = RecorderStatuses;
   }
 
   startRecord() {
@@ -37,9 +51,11 @@ export class RecordPage {
     // TODO: Check if browser supports getUserMedia
     navigator.mediaDevices.getUserMedia(constraints)
       .then((stream) => {
+        this.currentStatus = RecorderStatuses.Recording;
         this.recorder = new Recorder(this.audioContext);
         this.recorder.init(stream);
         this.recorder.start();
+        this.timeElapsed = Observable.timer(0, 1000);
         console.log("Recording started");
       })
       .catch(function (err) {
@@ -49,6 +65,7 @@ export class RecordPage {
 
   stopRecord() {
     this.recorder.stop().then(({buffer, blob}) => {
+      this.currentStatus = RecorderStatuses.Stopped;
       console.log("Recording stopped");
       this.blob = blob;
       const url = URL.createObjectURL(blob);
@@ -63,7 +80,20 @@ export class RecordPage {
 
       this.mediaStorage.set(media);
       console.log("Media stored in indexedDB");
+
+      this.navCtrl.setRoot(HomePage);
     });
   }
 
+  cancelRecord() {
+    this.recorder = undefined;
+    this.timeElapsed = undefined;
+    this.currentStatus = RecorderStatuses.NotStarted;
+  }
+}
+
+export enum RecorderStatuses {
+  NotStarted = 1,
+  Recording = 2,
+  Stopped = 3,
 }

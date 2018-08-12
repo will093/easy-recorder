@@ -8,16 +8,20 @@
 
   <ion-content padding>
     <div class="timer-container">
-      <div class="timer">00:00</div>
+      <div *ngIf="timeElapsed" class="timer">{{ timeElapsed | async | timer }}</div>
+      <div *ngIf="!timeElapsed" class="timer">{{ 0 | timer }}</div>
     </div>
   </ion-content>
 
   <ion-footer>
-    <ion-toolbar>
-      <button ion-button color="secondary">Record</button>
-      <button ion-button color="secondary">Stop</button>
-      <button ion-button color="secondary">Pause</button>
-      <button ion-button color="secondary">Cancel</button>
-      <button ion-button color="secondary">Resume</button>
+    <ion-toolbar *ngIf="currentStatus === recorderStatuses.NotStarted">
+      <button ion-button color="secondary" tappable (click)="startRecord()">Record</button>
+    </ion-toolbar>
+    <ion-toolbar *ngIf="currentStatus === recorderStatuses.Recording">
+      <button ion-button color="secondary" tappable (click)="stopRecord()">Stop</button>
+      <button ion-button color="secondary" tappable (click)="cancelRecord()">Cancel</button>
+    </ion-toolbar>
+    <ion-toolbar *ngIf="currentStatus === recorderStatuses.Stopped">
+      <audio controls *ngIf="blobUrl" [src]="blobUrl"></audio>
     </ion-toolbar>
   </ion-footer>

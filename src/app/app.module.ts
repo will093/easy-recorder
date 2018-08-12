@@ -12,7 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
   ],
   imports: [
     BrowserModule,
