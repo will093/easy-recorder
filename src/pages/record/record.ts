@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import Recorder from 'recorder-js';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { MediaStorageService } from '../../services/media-storage.service';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+import { Component } from '@angular/core';
 import { Media } from '../../model/media.model';
+import { MediaStorageService } from '../../services/media-storage.service';
+import Recorder from 'recorder-js';
+
 /**
  * Generated class for the RecordPage page.
  *
