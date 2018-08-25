@@ -73,7 +73,7 @@ export class RecordPage implements OnInit {
       const url = URL.createObjectURL(blob);
       this.blobUrl = this.sanitizer.bypassSecurityTrustUrl(url);
 
-      const recordingNumber = this.mediaStorage.getNextMediaNumber().subscribe((number) => {
+      this.mediaStorage.getNextMediaNumber().subscribe((number) => {
         const media: Media = {
           name: `Recording ${number}`,
           id: number.toString(),

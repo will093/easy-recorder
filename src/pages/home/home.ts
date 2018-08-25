@@ -24,6 +24,7 @@ export class HomePage implements OnInit {
   ngOnInit(): void {
     this.$media = this.mediaStorageService.getAll().pipe(
       map(v => Object.keys(v).map(key => v[key])),
+      // Set the blobUrl for each media.
       tap(medias => medias.forEach(media => {
         const url = URL.createObjectURL(media.blob);
         (media as any).blobUrl = this.sanitizer.bypassSecurityTrustUrl(url);
