@@ -1,3 +1,5 @@
+import * as moment from 'moment';
+
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -71,17 +73,20 @@ export class RecordPage implements OnInit {
       const url = URL.createObjectURL(blob);
       this.blobUrl = this.sanitizer.bypassSecurityTrustUrl(url);
 
-      const media: Media = {
-        name: 'test',
-        id: '1',
-        blob: blob,
-        mimeType: this.blob.type
-      }
+      const recordingNumber = this.mediaStorage.getNextMediaNumber().subscribe((number) => {
+        const media: Media = {
+          name: `Recording ${number}`,
+          id: number.toString(),
+          blob: blob,
+          mimeType: this.blob.type,
+          dateTime: moment().toISOString(),
+        }
 
-      this.mediaStorage.set(media);
-      console.log("Media stored in indexedDB");
+        this.mediaStorage.set(media);
+        console.log("Media stored in indexedDB");
 
-      this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(HomePage);
+      });
     });
   }
 

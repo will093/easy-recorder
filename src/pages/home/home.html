@@ -8,4 +8,11 @@
 
 <ion-content padding>
   <button ion-button color="primary" navPush="RecordPage">Record</button>
+  <div *ngIf="$media | async as medias">
+    <div *ngFor="let media of medias">
+      <p>{{ media.name }}</p>
+      <p>{{ media.dateTime }}</p>
+      <audio controls [src]="media.blobUrl"></audio>
+    </div>
+  </div>
 </ion-content>
