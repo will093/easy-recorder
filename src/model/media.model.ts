@@ -6,4 +6,6 @@ export interface Media {
   mimeType: string;
   blob: Blob;
   dateTime: string;
+  // Length in seconds.
+  length: number;
 }

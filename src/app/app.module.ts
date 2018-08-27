@@ -6,6 +6,7 @@ import { HomePage } from '../pages/home/home';
 import { IonicStorageModule } from '@ionic/storage';
 import { MediaStorageService } from '../services/media-storage.service';
 import { MyApp } from './app.component';
+import { PipesModule } from '../pipes/pipes.module';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
@@ -19,7 +20,8 @@ import { StatusBar } from '@ionic-native/status-bar';
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot({
       name: 'easy-recorder',
-    })
+    }),
+    PipesModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

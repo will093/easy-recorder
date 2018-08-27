@@ -9,6 +9,7 @@ import { Media } from '../../model/media.model';
 import { MediaStorageService } from '../../services/media-storage.service';
 import { Observable } from 'rxjs';
 import Recorder from 'recorder-js';
+import { withLatestFrom } from 'rxjs/operators';
 
 /**
  * Generated class for the RecordPage page.
@@ -57,7 +58,7 @@ export class RecordPage implements OnInit {
         this.recorder = new Recorder(this.audioContext);
         this.recorder.init(stream);
         this.recorder.start();
-        this.timeElapsed = Observable.timer(0, 1000);
+        this.timeElapsed = Observable.timer(0, 1000).shareReplay();
         console.log("Recording started");
       })
       .catch(function (err) {
@@ -66,20 +67,22 @@ export class RecordPage implements OnInit {
   }
 
   stopRecord() {
-    this.recorder.stop().then(({buffer, blob}) => {
+    this.recorder.stop().then(({ buffer, blob }) => {
       this.currentStatus = RecorderStatuses.Stopped;
       console.log("Recording stopped");
       this.blob = blob;
       const url = URL.createObjectURL(blob);
       this.blobUrl = this.sanitizer.bypassSecurityTrustUrl(url);
 
-      this.mediaStorage.getNextMediaNumber().subscribe((number) => {
+      this.mediaStorage.getNextMediaNumber().pipe(withLatestFrom(this.timeElapsed)).subscribe(([number, timeElapsed]) => {
+
         const media: Media = {
           name: `Recording ${number}`,
           id: number.toString(),
           blob: blob,
           mimeType: this.blob.type,
           dateTime: moment().toISOString(),
+          length: timeElapsed,
         }
 
         this.mediaStorage.set(media);
