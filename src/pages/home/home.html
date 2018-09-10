@@ -9,10 +9,20 @@
 <ion-content padding>
   <button ion-button color="primary" navPush="RecordPage">Record</button>
   <ion-list *ngIf="$media | async as medias">
-    <button ion-item *ngFor="let media of medias">
-      <p>{{ media.name }}</p>
-      <p>{{ media.dateTime | date : 'dd/MM/yyyy' }}</p>
-      <p item-end>{{ media.length | timer }}</p>
+    <button ion-item *ngFor="let media of medias; let i = index" (click)="onAudioClick(media)">
+      <div class="audio-controls" item-start>
+          <ion-icon *ngIf="!mediaIsPlaying(media)" name="play"></ion-icon>
+          <ion-icon *ngIf="mediaIsPlaying(media)" name="pause"></ion-icon>
+      </div>
+      <ion-label>
+        <div>{{ media.name }}</div>
+        <div>{{ media.dateTime | date : 'dd/MM/yyyy'}}</div>
+      </ion-label>
+      <div *ngIf="!mediaIsSelected(media)" item-end>{{ media.length | timer }}</div>
+      <ion-range *ngIf="mediaIsSelected(media)" min="0" [max]="media.length" [(ngModel)]="currentAudio.currentTime" color="secondary">
+        <span range-left>{{ $currentAudioTime | async | timer }}</span>
+        <span range-right>{{ media.length | timer }}</span>
+      </ion-range>
     </button>
   </ion-list>
 </ion-content>

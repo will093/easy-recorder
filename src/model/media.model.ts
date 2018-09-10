@@ -5,6 +5,8 @@ export interface Media {
   name: string;
   mimeType: string;
   blob: Blob;
+  // Not persisted in local storage.
+  blobUrl?: string;
   dateTime: string;
   // Length in seconds.
   length: number;
