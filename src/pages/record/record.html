@@ -21,7 +21,4 @@
       <button ion-button color="secondary" tappable (click)="stopRecord()">Stop</button>
       <button ion-button color="secondary" tappable (click)="cancelRecord()">Cancel</button>
     </ion-toolbar>
-    <ion-toolbar *ngIf="currentStatus === recorderStatuses.Stopped">
-      <audio controls *ngIf="blobUrl" [src]="blobUrl"></audio>
-    </ion-toolbar>
   </ion-footer>

@@ -34,3 +34,27 @@
     padding: 3rem;
   }
 }
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-small {
+  font-size: 1.4rem;
+}
+
+
+.app-container-outer {
+  background: lighten(map-get($colors, dark), 10%);
+  .app-container {
+    position: relative;
+    height: 100vh;
+    max-width: 480px;
+    margin: auto;
+  }
+}
+
+// Override Ionic scroll behavior to only show scrollbar when needed on desktop
+.scroll-content {
+  overflow-y: auto;
+}

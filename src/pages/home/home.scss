@@ -14,4 +14,56 @@ page-home {
     padding-left: 0.5rem;
     width: 2.5rem;
   }
+
+  ion-toolbar {
+    text-align: center;
+  }
+
+  button {
+    min-width: 48%;
+  }
+
+  .media-meta-secondary {
+    text-align: right;
+  }
+
+  ion-content {
+    .list-md {
+
+      .item-block {
+
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        color: white;
+        background-color: map-get($colors, secondary);
+        border-bottom: 1px solid darken(map-get($colors, secondary), 5%);
+
+        .item-inner {
+          border: none;
+        }
+      }
+
+      .item-block.active {
+        .audio-controls {
+          padding-bottom: 5rem;
+        }
+      }
+    }
+  }
+
+
+  .range-md {
+
+    .range-bar {
+      background: lighten(map-get($colors, secondary), 10%);
+    }
+
+    .range-bar-active, .range-knob {
+      background: darken(map-get($colors, light), 10%);
+    }
+  }
+
+  .primary-colour {
+    color: map-get($colors, primary)
+  }
 }
