@@ -31,11 +31,12 @@
     "recorder-js": "^1.0.7",
     "rxjs": "5.5.11",
     "sw-toolbox": "3.6.0",
-    "zone.js": "0.8.26"
+    "zone.js": "0.8.26",
+    "@ionic/app-scripts": "3.1.11"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "3.1.11",
     "typescript": "~2.6.2"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "postinstall": "ionic build --prod"
 }
