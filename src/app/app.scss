@@ -46,10 +46,11 @@
 
 .app-container-outer {
   background: lighten(map-get($colors, dark), 10%);
+  height: 100%;
   .app-container {
     position: relative;
-    height: 100vh;
-    max-width: 480px;
+    height: 100%;
+    max-width: 600px;
     margin: auto;
   }
 }
