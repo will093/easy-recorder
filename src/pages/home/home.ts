@@ -70,4 +70,14 @@ export class HomePage implements OnInit {
     return this.mediaIsSelected(media) && !this.currentAudio.paused;
   }
 
+  toggleMediaMenu(event, media: any) {
+    event.preventDefault();
+    event.stopPropagation();
+    media.showMenu = !media.showMenu;
+  }
+
+  hideMediaMenu(medias) {
+    // TODO
+  }
+
 }

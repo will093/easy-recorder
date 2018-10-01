@@ -28,29 +28,52 @@ page-home {
   }
 
   ion-content {
-    .list-md {
 
-      .item-block {
+    .item-block {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      color: map-get($colors, light);
+      background: map-get($colors, secondary);
+      border-bottom: 1px solid darken(map-get($colors, secondary), 5%);
+    }
 
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-        color: white;
-        background-color: map-get($colors, secondary);
-        border-bottom: 1px solid darken(map-get($colors, secondary), 5%);
+    .item-inner {
+      border: none !important;
+    }
 
-        .item-inner {
-          border: none;
-        }
-      }
-
-      .item-block.active {
-        .audio-controls {
-          padding-bottom: 5rem;
-        }
-      }
+    .audio-controls {
+      padding-bottom: 5rem;
     }
   }
 
+  .media-menu-more {
+    float: right;
+    width: 15rem;
+    color: map-get($colors, light);
+
+    ion-item {
+      position: relative;
+      top: -3rem;
+      background: map-get($colors, dark);
+      text-align: center;
+    }
+
+    button {
+      background: none;
+      color: map-get($colors, light);
+      border: none;
+      font-size: 1.8rem;
+    }
+  }
+
+  .media-button-more {
+    background: none;
+    color: map-get($colors, light);
+    font-size: 1.5em;
+    padding: 0.5em 0.6em;
+    position: relative;
+    z-index: 2;
+  }
 
   .range-md {
 

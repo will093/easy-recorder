@@ -1,3 +1,5 @@
+<ng-container>
+
 <ion-header>
   <ion-navbar>
     <ion-title>
@@ -6,26 +8,39 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content >
+<ion-content (click)="hideMediaMenu()">
   <ion-list *ngIf="$media | async as medias">
-    <button [ngClass]="{ 'active': mediaIsSelected(media) }" ion-item *ngFor="let media of medias; let i = index" (click)="onAudioClick(media)">
-      <div class="audio-controls" item-start>
-          <ion-icon *ngIf="!mediaIsPlaying(media)" name="play"></ion-icon>
-          <ion-icon *ngIf="mediaIsPlaying(media)" name="pause"></ion-icon>
-      </div>
-      <ion-label class="media-meta-primary">
-        <div class="text-bold">{{ media.name }}</div>
-        <div class="text-small">{{ media.dateTime | date : 'dd/MM/yyyy'}}</div>
-      </ion-label>
-      <div class="media-meta-secondary" *ngIf="!mediaIsSelected(media)" item-end>
-        <div class="text-bold">{{ media.length | timer }}</div>
-        <div class="text-small">{{ media.blob.size/ 10000000 | number:'1.2-2' }}MB</div>
-      </div>
-      <ion-range *ngIf="mediaIsSelected(media)" min="0" [max]="media.length" [(ngModel)]="currentAudio.currentTime" color="secondary">
-        <span range-left>{{ $currentAudioTime | async | timer }}</span>
-        <span range-right>{{ media.length | timer }}</span>
-      </ion-range>
-    </button>
+    <ng-container *ngFor="let media of medias; let i = index">
+        <button [ngClass]="{ 'active': mediaIsSelected(media) }" ion-item (click)="onAudioClick(media)">
+            <div class="audio-controls" item-start>
+                <ion-icon *ngIf="!mediaIsPlaying(media)" name="play"></ion-icon>
+                <ion-icon *ngIf="mediaIsPlaying(media)" name="pause"></ion-icon>
+            </div>
+            <ion-label class="media-meta-primary">
+              <div class="text-bold">{{ media.name }}</div>
+              <div class="text-small">{{ media.dateTime | date : 'dd/MM/yyyy'}}</div>
+            </ion-label>
+            <div class="media-meta-secondary" *ngIf="!mediaIsSelected(media)" item-end>
+              <div class="text-bold">{{ media.length | timer }}</div>
+              <div class="text-small">{{ media.blob.size/ 10000000 | number:'1.2-2' }}MB</div>
+            </div>
+            <div item-end>
+              <button class="media-button-more" (click)="toggleMediaMenu($event, media)">
+                  <ion-icon name="ios-more"></ion-icon>
+              </button>
+            </div>
+            <ion-range *ngIf="mediaIsSelected(media)" min="0" [max]="media.length" [(ngModel)]="currentAudio.currentTime" color="secondary">
+              <span range-left>{{ $currentAudioTime | async | timer }}</span>
+              <span range-right>{{ media.length | timer }}</span>
+            </ion-range>
+          </button>
+          <div *ngIf="media.showMenu" class="media-menu-more">
+            <ion-list>
+              <ion-item><button (click)="onDeleteClicked(media)">Delete</button></ion-item>
+              <ion-item><button>Share</button></ion-item>
+            </ion-list>
+          </div>
+    </ng-container>
   </ion-list>
 </ion-content>
 
@@ -34,3 +49,5 @@
     <button ion-button color="secondary" tappable navPush="RecordPage">Record</button>
   </ion-toolbar>
 </ion-footer>
+
+</ng-container>
