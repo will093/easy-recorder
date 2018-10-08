@@ -1,6 +1,6 @@
 <ng-container>
 
-<ion-header>
+<ion-header (click)="hideMediaMenu()">
   <ion-navbar>
     <ion-title>
       Easy Recorder
@@ -9,8 +9,8 @@
 </ion-header>
 
 <ion-content (click)="hideMediaMenu()">
-  <ion-list *ngIf="$media | async as medias">
-    <ng-container *ngFor="let media of medias; let i = index">
+  <ion-list *ngIf="medias">
+    <div class="media-item" *ngFor="let media of medias; let i = index">
         <button [ngClass]="{ 'active': mediaIsSelected(media) }" ion-item (click)="onAudioClick(media)">
             <div class="audio-controls" item-start>
                 <ion-icon *ngIf="!mediaIsPlaying(media)" name="play"></ion-icon>
@@ -36,15 +36,14 @@
           </button>
           <div *ngIf="media.showMenu" class="media-menu-more">
             <ion-list>
-              <ion-item><button (click)="onDeleteClicked(media)">Delete</button></ion-item>
-              <ion-item><button>Share</button></ion-item>
+              <ion-item><button (click)="onDeleteClick(media)"><ion-icon name="ios-trash"></ion-icon></button></ion-item>
             </ion-list>
           </div>
-    </ng-container>
+        </div>
   </ion-list>
 </ion-content>
 
-<ion-footer>
+<ion-footer (click)="hideMediaMenu()">
   <ion-toolbar>
     <button ion-button color="secondary" tappable navPush="RecordPage">Record</button>
   </ion-toolbar>

@@ -40,14 +40,17 @@ page-home {
     .item-inner {
       border: none !important;
     }
+  }
 
-    .audio-controls {
-      padding-bottom: 5rem;
-    }
+  .media-item {
+    position: relative;
   }
 
   .media-menu-more {
-    float: right;
+    position: absolute;
+    right: 0;
+    top: 12rem;
+    z-index: 1;
     width: 15rem;
     color: map-get($colors, light);
 

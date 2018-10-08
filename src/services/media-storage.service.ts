@@ -31,4 +31,9 @@ export class MediaStorageService {
       })
     );
   }
+
+  delete(mediaId: string): Observable<boolean> {
+    const result = Observable.from(this.storage.remove(mediaId));
+    return result;
+  }
 }
