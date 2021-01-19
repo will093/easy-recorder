@@ -26,7 +26,7 @@
 }
 
 .content {
-  background-color: map-get($colors, secondary);
+  background-color: map-get($colors, light);
 }
 
 .footer {
@@ -45,14 +45,20 @@
 
 
 .app-container-outer {
-  background: lighten(map-get($colors, dark), 10%);
+  background: lighten(map-get($colors, dark), 20%);
   height: 100%;
-  .app-container {
-    position: relative;
-    height: 100%;
-    max-width: 600px;
-    margin: auto;
-  }
+  // .app-container {
+  //   position: relative;
+  //   height: 100%;
+  //   max-width: 600px;
+  //   margin: auto;
+  // }
+}
+
+.content-container {
+
+  max-width: 600px;
+  margin: auto;
 }
 
 // Override Ionic scroll behavior to only show scrollbar when needed on desktop

@@ -15,10 +15,14 @@
 
   <ion-footer>
     <ion-toolbar *ngIf="currentStatus === recorderStatuses.NotStarted">
-      <button ion-button color="secondary" tappable (click)="startRecord()">Record</button>
+      <div class="content-container">
+        <button ion-button color="secondary" tappable (click)="startRecord()">Record</button>
+      </div>
     </ion-toolbar>
     <ion-toolbar *ngIf="currentStatus === recorderStatuses.Recording">
-      <button ion-button color="secondary" tappable (click)="stopRecord()">Stop</button>
-      <button ion-button color="secondary" tappable (click)="cancelRecord()">Cancel</button>
+      <div class="content-container">
+        <button ion-button color="secondary" tappable (click)="stopRecord()">Stop</button>
+        <button ion-button color="secondary" tappable (click)="cancelRecord()">Cancel</button>
+      </div>
     </ion-toolbar>
   </ion-footer>
