@@ -9,13 +9,27 @@ page-record {
 
   .timer {
     margin: auto;
-    font-size: 4rem;
+    font-size: 4vh;
     background-color: map-get($colors, primary);
     color: map-get($colors, light);
     width: 25vh;
     height: 25vh;
     line-height: 25vh;
     border-radius: 50%;
+    box-shadow: 0 0 5px 0 rgba(175,9,9,0.4);
+
+    &.glow {
+      animation: glow 1.5s infinite alternate;
+    }
+  }
+
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 5px 0 rgba(175,9,9,0.4);
+    }
+    to {
+      box-shadow: 0 0 20px 10px rgba(175,9,9,0.6);
+    }
   }
 
   ion-toolbar {

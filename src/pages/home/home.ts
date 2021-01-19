@@ -38,6 +38,7 @@ export class HomePage implements OnInit, OnDestroy {
       map(v => Object.keys(v).map(key => v[key]).sort((a, b) => { return moment(a.dateTime) < moment(b.dateTime) ? 1 : -1 })),
       // Set the blobUrl for each media.
       map(medias => medias.map(media => {
+        // TODO: handle errors.
         const url = URL.createObjectURL(media.blob);
         media.blobUrl = url;
         return media as HomeMedia;
