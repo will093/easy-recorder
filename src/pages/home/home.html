@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content (click)="hideMediaMenu()">
-  <ion-list class="content-container" *ngIf="medias && medias.length">
+  <ion-list class="content-container" *ngIf="medias && medias.length; else noRecordings">
     <div class="media-item" *ngFor="let media of medias; let i = index">
       <button [ngClass]="{ 'active': mediaIsSelected(media) }" ion-item (click)="onAudioClick(media)">
           <div class="audio-controls" item-start>
@@ -36,7 +36,9 @@
         </button>
         <div *ngIf="media.showMenu" class="media-menu-more">
           <ion-list>
-            <ion-item><button (click)="onDeleteClick(media)"><ion-icon name="ios-trash"></ion-icon></button></ion-item>
+            <ion-item>
+              <button (click)="onDeleteClick(media)"><ion-icon name="ios-trash"></ion-icon>Delete</button>
+            </ion-item>
           </ion-list>
         </div>
       </div>
@@ -52,3 +54,11 @@
 </ion-footer>
 
 </ng-container>
+
+<ng-template #noRecordings>
+  <div class="content-container no-recordings">
+    <div>
+      <p>You currently have no recordings.</p>
+    </div>
+  </div>
+</ng-template>
