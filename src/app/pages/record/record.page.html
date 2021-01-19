@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Record
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <div class="timer-container">
+    <div *ngIf="timeElapsed" class="timer glow">{{ timeElapsed | async | timer }}</div>
+    <div *ngIf="!timeElapsed" class="timer">{{ 0 | timer }}</div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar *ngIf="currentStatus === recorderStatuses.NotStarted">
+    <div class="content-container">
+      <button ion-button color="secondary" tappable (click)="startRecord()">Start</button>
+    </div>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="currentStatus === recorderStatuses.Recording">
+    <div class="content-container">
+      <button ion-button color="secondary" tappable (click)="stopRecord()">Stop</button>
+      <button ion-button color="secondary" tappable (click)="cancelRecord()">Cancel</button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

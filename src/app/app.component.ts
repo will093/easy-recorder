@@ -1,22 +1,24 @@
 import { Component } from '@angular/core';
-import { HomePage } from '../pages/home/home';
-import { Platform } from 'ionic-angular';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
+import { Plugins } from '@capacitor/core';
+const { SplashScreen } = Plugins;
 
 @Component({
-  templateUrl: 'app.html'
+  selector: 'app-root',
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss']
 })
-export class MyApp {
-  rootPage:any = HomePage;
+export class AppComponent {
+  constructor() {
+    this.initializeApp();
+  }
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
-    });
+  initializeApp() {
+    /* To make sure we provide the fastest app loading experience 
+       for our users, hide the splash screen automatically 
+       when the app is ready to be used:
+        
+        https://capacitor.ionicframework.com/docs/apis/splash-screen#hiding-the-splash-screen
+    */
+    SplashScreen.hide();
   }
 }
-

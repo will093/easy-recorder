@@ -1,38 +1,23 @@
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HomePage } from '../pages/home/home';
+import { RouteReuseStrategy } from '@angular/router';
+
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
-import { MediaStorageService } from '../services/media-storage.service';
-import { MyApp } from './app.component';
-import { PipesModule } from '../pipes/pipes.module';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 
 @NgModule({
-  declarations: [
-    MyApp,
-    HomePage,
-  ],
+  declarations: [AppComponent],
+  entryComponents: [],
   imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot({
-      name: 'easy-recorder',
-    }),
-    PipesModule,
+    BrowserModule, 
+    IonicModule.forRoot(), 
+    IonicStorageModule.forRoot(),
+    AppRoutingModule,
   ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    HomePage,
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    MediaStorageService,
-  ]
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
