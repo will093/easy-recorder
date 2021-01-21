@@ -1,48 +1,44 @@
-  .timer-container {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
+.timer-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.timer {
+  margin: auto;
+  font-size: 4vh;
+  background-color: var(--ion-color-primary);
+  color: var(--ion-color-light);
+  width: 25vh;
+  height: 25vh;
+  line-height: 25vh;
+  border-radius: 50%;
+  box-shadow: 0 0 5px 0 rgba(175, 9, 9, 0.4);
+
+  &.glow {
+    animation: glow 1.5s infinite alternate;
   }
+}
 
-  .timer {
-    margin: auto;
-    font-size: 4vh;
-    background-color: var(--ion-color-primary);
-    color: var(--ion-color-light);
-    width: 25vh;
-    height: 25vh;
-    line-height: 25vh;
-    border-radius: 50%;
-    box-shadow: 0 0 5px 0 rgba(175,9,9,0.4);
-
-    &.glow {
-      animation: glow 1.5s infinite alternate;
-    }
+@keyframes glow {
+  from {
+    box-shadow: 0 0 5px 0 rgba(175, 9, 9, 0.4);
   }
-
-  @keyframes glow {
-    from {
-      box-shadow: 0 0 5px 0 rgba(175,9,9,0.4);
-    }
-    to {
-      box-shadow: 0 0 20px 10px rgba(175,9,9,0.6);
-    }
+  to {
+    box-shadow: 0 0 20px 10px rgba(175, 9, 9, 0.6);
   }
+}
 
-// -- Footer styles
-
-ion-footer {
-  ion-toolbar {
-    --background: var(--ion-color-dark);
-
-    .content-container {
-      display: flex;
-      justify-content: center;
-    }
-  }
+app-footer {
   ion-button {
-    min-width: 48%;
+    flex: 1;
+    max-width: 50%;
+  }
+
+  ion-icon {
+    font-size: 1rem;
+    margin-right: 0.5rem;
   }
 }

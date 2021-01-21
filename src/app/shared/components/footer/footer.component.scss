@@ -1,0 +1,11 @@
+ion-footer {
+  ion-toolbar {
+    --background: var(--ion-color-dark);
+    padding: 0 0.3rem;
+
+    .content-container {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

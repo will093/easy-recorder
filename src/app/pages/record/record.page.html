@@ -7,16 +7,21 @@
   </div>
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar *ngIf="currentStatus === recorderStatuses.NotStarted">
-    <div class="content-container">
-      <ion-button color="secondary" tappable (click)="startRecord()">Start</ion-button>
-    </div>
-  </ion-toolbar>
-  <ion-toolbar *ngIf="currentStatus === recorderStatuses.Recording">
-    <div class="content-container">
-      <ion-button color="secondary" tappable (click)="stopRecord()">Stop</ion-button>
-      <ion-button color="secondary" tappable (click)="cancelRecord()">Cancel</ion-button>
-    </div>
-  </ion-toolbar>
-</ion-footer>
+<app-footer>
+  <ng-container *ngIf="currentStatus === recorderStatuses.NotStarted">
+    <ion-button shape="round" color="tertiary" tappable (click)="startRecord()">
+      <ion-icon name="ellipse"></ion-icon>
+      Start
+    </ion-button>
+  </ng-container>
+  <ng-container *ngIf="currentStatus === recorderStatuses.Recording">
+    <ion-button shape="round" color="tertiary" tappable (click)="stopRecord()">
+      <ion-icon name="square"></ion-icon>
+      Stop
+    </ion-button>
+    <ion-button shape="round" color="secondary" tappable (click)="cancelRecord()">
+      <ion-icon name="close"></ion-icon>
+      Cancel
+    </ion-button>
+  </ng-container>
+</app-footer>

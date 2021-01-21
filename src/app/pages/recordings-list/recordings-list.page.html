@@ -37,13 +37,12 @@
     </ion-list>
   </ion-content>
   
-  <ion-footer>
-    <ion-toolbar>
-      <div class="content-container">
-        <ion-button color="secondary" tappable [routerLink]="['/record']">Record</ion-button>
-      </div>
-    </ion-toolbar>
-  </ion-footer>
+  <app-footer>
+    <ion-button shape="round" color="tertiary" tappable [routerLink]="['/record']">
+      <ion-icon name="add-outline"></ion-icon>
+      New Recording
+    </ion-button>
+  </app-footer>
   
   <ng-template #noRecordings>
     <div class="content-container no-recordings">

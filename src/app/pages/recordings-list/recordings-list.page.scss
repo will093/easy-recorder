@@ -105,19 +105,3 @@ ion-item {
     padding: 0;
   }
 }
-
-// -- Footer styles
-
-ion-footer {
-  ion-toolbar {
-    --background: var(--ion-color-dark);
-
-    .content-container {
-      display: flex;
-      justify-content: center;
-    }
-  }
-  ion-button {
-    min-width: 48%;
-  }
-}
