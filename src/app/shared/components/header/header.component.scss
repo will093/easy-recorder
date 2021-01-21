@@ -1,0 +1,22 @@
+ion-header {
+
+  ion-toolbar {
+    --background: var(--ion-color-dark);
+    --color: var(--ion-color-dark-contrast);
+    padding: 0.25rem 0;
+  }
+
+  img {
+    height: 3rem;
+    margin: 0 0.5rem;
+  }
+
+  ion-title {
+    padding: 0;
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+  }
+}

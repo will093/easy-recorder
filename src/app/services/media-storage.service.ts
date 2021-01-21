@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Media } from '../models/media.model';
+import { Media } from '../shared/models/media.model';
 import { Observable, from } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { map } from 'rxjs/operators';

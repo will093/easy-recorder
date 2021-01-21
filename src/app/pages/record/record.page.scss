@@ -1,4 +1,3 @@
-
   .timer-container {
     height: 100%;
     display: flex;
@@ -32,10 +31,18 @@
     }
   }
 
-  ion-toolbar {
-    text-align: center;
-  }
+// -- Footer styles
 
-  button {
+ion-footer {
+  ion-toolbar {
+    --background: var(--ion-color-dark);
+
+    .content-container {
+      display: flex;
+      justify-content: center;
+    }
+  }
+  ion-button {
     min-width: 48%;
   }
+}

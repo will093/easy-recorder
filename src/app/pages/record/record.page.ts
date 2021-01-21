@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { NavController, NavParams } from '@ionic/angular';
 
-import { Media } from '../../models/media.model';
+import { Media } from '../../shared/models/media.model';
 import { MediaStorageService } from '../../services/media-storage.service';
 import { Observable, timer } from 'rxjs';
 import Recorder from 'recorder-js';
@@ -79,7 +79,7 @@ export class RecordPage implements OnInit {
         }
 
         this.mediaStorage.set(media);
-        console.log("Media stored in indexedDB");
+        console.log("Media stored in indexedDB", media);
 
         this.navCtrl.navigateRoot('');
       });

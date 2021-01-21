@@ -5,14 +5,14 @@ import { IonicModule } from '@ionic/angular';
 
 import { RecordingsListPage } from './recordings-list.page';
 import { RouterModule } from '@angular/router';
-import { TimerModule } from '../../pipes/timer/timer.module';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TimerModule,
+    SharedModule,
     RouterModule.forChild([{ path: '', component: RecordingsListPage}])
   ],
   declarations: [RecordingsListPage]

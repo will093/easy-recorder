@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChildren } from '@angular/core';
 import { Observable, Subject, timer } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 
-import { Media } from '../../models/media.model';
+import { Media } from '../../shared/models/media.model';
 import { MediaStorageService } from '../../services/media-storage.service';
 import { NavController } from '@ionic/angular';
 import moment from 'moment';
@@ -12,7 +12,7 @@ import moment from 'moment';
   templateUrl: 'recordings-list.page.html',
   styleUrls: ['recordings-list.page.scss']
 })
-export class RecordingsListPage implements OnInit, OnDestroy {
+export class RecordingsListPage implements OnDestroy {
 
   public medias: HomeMedia[];
 
@@ -27,7 +27,7 @@ export class RecordingsListPage implements OnInit, OnDestroy {
     private mediaStorageService: MediaStorageService,
   ) {}
 
-  ngOnInit(): void {
+  ionViewWillEnter(): void {
     this.setMedias();
   }
 
@@ -37,12 +37,21 @@ export class RecordingsListPage implements OnInit, OnDestroy {
       // Sort in reverse chronological order.
       map(v => Object.keys(v).map(key => v[key]).sort((a, b) => { return moment(a.dateTime) < moment(b.dateTime) ? 1 : -1 })),
       // Set the blobUrl for each media.
-      map(medias => medias.map(media => {
-        // TODO: handle errors.
-        const url = URL.createObjectURL(media.blob);
-        media.blobUrl = url;
-        return media as HomeMedia;
-      })),
+      map(medias => medias
+        .map(media => {
+          console.log(media);
+          // TODO: handle errors.
+          let url = URL.createObjectURL(media.blob);
+          // try {
+          //   URL.createObjectURL(media.blob);
+          // } catch (e) {
+          //   console.warn(e);
+          // }
+          media.blobUrl = url;
+          return media as HomeMedia;
+        })
+        .filter(media => media.blobUrl)
+      ),
     ).subscribe(medias => {
       this.medias = medias;
     });

@@ -180,46 +180,8 @@
 // --------------------------------------------------
 // App Global Sass
 // --------------------------------------------------
-
-.toolbar-background {
-  background-color: var(--ionic-color-dark);
-}
-
-.toolbar-title, .back-button {
-  color: var(--ionic-color-light);
-}
-
-.content {
-  background-color: var(--ionic-color-light);
-}
-
-.footer {
-  .toolbar-background {
-    padding: 3rem;
-  }
-}
-
-.text-bold {
-  font-weight: bold;
-}
-
-.text-small {
-  font-size: 1.4rem;
-}
-
-
-.app-container-outer {
-  height: 100%;
-}
-
 .content-container {
-
-  max-width: 600px;
+  max-width: 800px;
   margin: auto;
-}
-
-// Override Ionic scroll behavior to only show scrollbar when needed on desktop
-.scroll-content {
-  overflow-y: auto;
 }
 
