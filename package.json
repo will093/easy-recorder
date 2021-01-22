@@ -1,11 +1,11 @@
 {
-  "name": "photo-gallery-ng-capacitor",
-  "version": "2.0.0",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/docs/angular/your-first-app",
+  "name": "easy-recorder",
+  "version": "1.0.0",
+  "author": "Will Taylor",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node src/server.js",
+    "serve": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
