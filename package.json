@@ -26,6 +26,7 @@
     "@ionic/pwa-elements": "^1.5.2",
     "@ionic/storage": "^2.3.1",
     "core-js": "^3.6.5",
+    "express": "^4.17.1",
     "moment": "^2.29.1",
     "recorder-js": "^1.0.7",
     "rxjs": "^6.5.5",
