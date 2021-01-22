@@ -105,3 +105,15 @@ ion-item {
     padding: 0;
   }
 }
+
+app-footer {
+  ion-button {
+    flex: 1;
+    max-width: 50%;
+  }
+
+  ion-icon {
+    font-size: 1rem;
+    margin-right: 0.5rem;
+  }
+}

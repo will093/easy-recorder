@@ -1,13 +1,16 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>
-      <div class="title">
-        <img src="/assets/icon/easy-icon.png"/>
+<ion-toolbar>
+  <ion-buttons slot="start">
+    <ng-content></ng-content>
+  </ion-buttons>
+  <ion-title>
+    <div class="title-container">
+      <ion-button class="title-button" size="large" fill="clear" color="light" [routerLink]="['/']" routerDirection="root">
+        <div>
+          <img src="/assets/icon/easy-icon.png"/>
+        </div>
         Easy Recorder
-      </div>
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+      </ion-button>
+    </div>
+  </ion-title>
+</ion-toolbar>
+

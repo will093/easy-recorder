@@ -1,4 +1,10 @@
-<app-header></app-header>
+<!-- Workaround for back button (https://stackoverflow.com/questions/63005305/ion-back-button-is-not-showing-up-in-toolbar-in-ionic-5) -->
+<ion-header>
+  <app-header>
+    <ion-back-button></ion-back-button>
+  </app-header>  
+</ion-header>
+
  
  <ion-content (click)="hideMediaMenu()">
     <ion-list class="content-container" *ngIf="medias && medias.length; else noRecordings">
