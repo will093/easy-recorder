@@ -29,6 +29,8 @@ export class RecordingsListPage implements OnDestroy {
 
   ionViewWillEnter(): void {
     this.setMedias();
+    this.currentMedia = undefined;
+    this.currentAudio = undefined;
   }
 
   setMedias() {
