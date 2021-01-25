@@ -1,0 +1,38 @@
+<ion-item button [ngClass]="{ 'active': isSelected }" (click)="onAudioClick()">
+  <div slot="start" class="audio-controls">
+      <ion-icon *ngIf="!isPlaying()" name="play"></ion-icon>
+      <ion-icon *ngIf="isPlaying()" name="pause"></ion-icon>
+  </div>
+
+  <div class="media-item-content">
+    <div class="media-meta">
+      <div class="media-meta-primary">
+        <div class="text-bold">{{ media.name }}</div>
+        <div class="text-small">{{ media.dateTime | date : 'dd/MM/yyyy'}}</div>
+      </div>
+      <div class="media-meta-secondary">
+        <div class="text-bold">{{ media.length | timer }}</div>
+        <div class="text-small">{{ media.blob.size/ 10000000 | number:'1.2-2' }}MB</div>
+      </div>
+    </div>
+    <div class="media-range">
+      <ion-range *ngIf="isSelected && audioElement" min="0" [max]="media.length" [(ngModel)]="audioElement.currentTime" color="light">
+        <span slot="start">{{ $currentTime | async | timer }}</span>
+        <span slot="end">{{ media.length | timer }}</span>
+      </ion-range>
+    </div>
+  </div>
+
+  <div slot="end" class="menu-button-container">
+    <ion-button fill="clear" class="media-button-more" (click)="onMenuButtonClick($event)">
+      <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+    </ion-button>
+  </div>
+</ion-item>
+<div *ngIf="showMenu" class="media-menu-more" (clickOutside)="onCloseMenu()">
+  <ion-list>
+    <ion-item>
+      <ion-button fill="clear" (click)="onDeleteClick()"><ion-icon name="trash-outline"></ion-icon>Delete</ion-button>
+    </ion-item>
+  </ion-list>
+</div>
