@@ -1,15 +1,13 @@
 import moment from 'moment';
 
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { NavController, NavParams } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 import { Media } from '../../shared/models/media.model';
 import { MediaStorageService } from '../../services/media-storage.service';
 import { Observable, timer } from 'rxjs';
 import Recorder from 'recorder-js';
 import { shareReplay, withLatestFrom } from 'rxjs/operators';
-
 @Component({
   selector: 'app-record',
   templateUrl: 'record.page.html',
@@ -17,19 +15,15 @@ import { shareReplay, withLatestFrom } from 'rxjs/operators';
 })
 export class RecordPage implements OnInit {
 
-  audioContext: AudioContext;
   recorderStatuses: typeof RecorderStatuses;
-
-  recorder: any;
-  currentStatus: RecorderStatuses;
-
-  blob: Blob;
-  blobUrl: SafeUrl;
-
+  currentStatus: RecorderStatuses;;
   timeElapsed: Observable<number>;
 
+  private audioContext?: AudioContext;
+  private recorder?: any;
+  private track?: MediaStreamTrack;
+
   constructor(
-    private sanitizer: DomSanitizer,
     private mediaStorage: MediaStorageService,
     public navCtrl: NavController
   ) { }
@@ -40,11 +34,10 @@ export class RecordPage implements OnInit {
     this.recorderStatuses = RecorderStatuses;
   }
 
-  startRecord() {
+  startRecord(): void {
     const constraints = { audio: true };
 
-    console.log("Recording started");
-    // TODO: Check if browser supports getUserMedia
+    // TODO: handle case where browser doesn't support this API.
     navigator.mediaDevices.getUserMedia(constraints)
       .then((stream) => {
         this.currentStatus = RecorderStatuses.Recording;
@@ -52,20 +45,15 @@ export class RecordPage implements OnInit {
         this.recorder.init(stream);
         this.recorder.start();
         this.timeElapsed = timer(0, 1000).pipe(shareReplay());
-        console.log("Recording started");
-      })
-      .catch(function (err) {
-        /* handle the error */
+
+        this.track = stream.getTracks()[0];
       });
   }
 
-  stopRecord() {
-    this.recorder.stop().then(({ buffer, blob }) => {
+  stopRecord(): void {
+    this.recorder.stop().then(({ blob }) => {
+      this.track.stop();
       this.currentStatus = RecorderStatuses.Stopped;
-      console.log("Recording stopped");
-      this.blob = blob;
-      const url = URL.createObjectURL(blob);
-      this.blobUrl = this.sanitizer.bypassSecurityTrustUrl(url);
 
       this.mediaStorage.getNextMediaNumber().pipe(withLatestFrom(this.timeElapsed)).subscribe(([number, timeElapsed]) => {
 
@@ -73,27 +61,26 @@ export class RecordPage implements OnInit {
           name: `Recording ${number}`,
           id: number.toString(),
           blob: blob,
-          mimeType: this.blob.type,
+          mimeType: blob.type,
           dateTime: moment().toISOString(),
           length: timeElapsed,
         }
 
         this.mediaStorage.set(media);
-        console.log("Media stored in indexedDB", media);
-
         this.navCtrl.navigateRoot('');
       });
     });
   }
 
-  cancelRecord() {
+  cancelRecord(): void {
+    this.track.stop();
     this.recorder = undefined;
     this.timeElapsed = undefined;
     this.currentStatus = RecorderStatuses.NotStarted;
   }
 }
 
-export enum RecorderStatuses {
+enum RecorderStatuses {
   NotStarted = 1,
   Recording = 2,
   Stopped = 3,
