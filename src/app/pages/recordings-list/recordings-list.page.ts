@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Media } from '../../shared/models/media.model';
 import { MediaStorageService } from '../../services/media-storage.service';
@@ -12,12 +12,10 @@ import moment from 'moment';
   templateUrl: 'recordings-list.page.html',
   styleUrls: ['recordings-list.page.scss'],
 })
-export class RecordingsListPage implements OnDestroy {
+export class RecordingsListPage {
 
-  public medias: Media[];
+  public medias$: Observable<Media[]>;
   public selectedMediaId?: string;
-
-  public $destroy = new Subject<any>();
 
   constructor(
     public navCtrl: NavController,
@@ -28,9 +26,8 @@ export class RecordingsListPage implements OnDestroy {
     this.getMedias();
   }
 
-  getMedias() {
-    this.mediaStorageService.getAll().pipe(
-      takeUntil(this.$destroy),
+  getMedias(): void {
+    this.medias$ = this.mediaStorageService.getAll().pipe(
       map(v => Object
         .keys(v)
         .map(key => v[key])
@@ -43,21 +40,14 @@ export class RecordingsListPage implements OnDestroy {
           return media;
         })
       ),
-    ).subscribe(medias => {
-      this.medias = medias;
-    });
+    );
   }
 
-  ngOnDestroy() {
-    this.$destroy.next();
-    this.$destroy.complete();
-  }
-
-  onSelectAudio(media: Media) {
+  onSelectAudio(media: Media): void {
     this.selectedMediaId = media.id
   }
 
-  onDeleteAudio(media: Media) {
+  onDeleteAudio(media: Media): void {
     this.mediaStorageService.delete(media.id).subscribe(() => {
       this.getMedias();
     });

@@ -4,8 +4,10 @@
     <ion-back-button></ion-back-button>
   </app-header>  
 </ion-header>
- <ion-content>
-    <ion-list class="content-container" *ngIf="medias && medias.length; else noRecordings">
+
+<ion-content>
+  <ng-container *ngIf="medias$ | async as medias">
+    <ion-list *ngIf="medias.length; else noRecordings" class="content-container">
       <div class="media-item" *ngFor="let media of medias; let i = index">
         <app-recording-item 
           [media]="media" 
@@ -15,18 +17,19 @@
         ></app-recording-item>
       </div>
     </ion-list>
-  </ion-content>
-  
-  <app-footer>
-    <ion-button shape="round" color="tertiary" tappable [routerLink]="['/record']">
-      <ion-icon name="add-outline"></ion-icon>
-      New Recording
-    </ion-button>
-  </app-footer>
-  
-  <ng-template #noRecordings>
-    <div class="content-container no-recordings">
-      <p>You currently have no recordings.</p>
-    </div>
-  </ng-template>
+  </ng-container>
+</ion-content>
+
+<app-footer>
+  <ion-button shape="round" color="tertiary" tappable [routerLink]="['/record']">
+    <ion-icon name="add-outline"></ion-icon>
+    New Recording
+  </ion-button>
+</app-footer>
+
+<ng-template #noRecordings>
+  <div class="content-container no-recordings">
+    <p>You currently have no recordings.</p>
+  </div>
+</ng-template>
   
