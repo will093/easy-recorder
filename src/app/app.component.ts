@@ -3,7 +3,7 @@ import { Plugins } from '@capacitor/core';
 const { SplashScreen } = Plugins;
 
 @Component({
-  selector: 'app-root',
+  selector: 'er-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })

@@ -12,11 +12,6 @@ ion-item {
     font-weight: bold;
   }
   
-  ion-label {
-    width: 100%;
-    padding: 0 4px;
-  }
-  
   .audio-controls {
     padding-left: 0.3rem;
     width: 2.5rem;
@@ -24,6 +19,10 @@ ion-item {
     font-size: 1.2rem;
   }
   
+  .media-meta {
+    font-size: 1rem;
+  }
+
   .media-meta-secondary {
     text-align: right;
   }
@@ -48,6 +47,7 @@ ion-item {
 
   ion-range {
     padding: 0;
+    font-size: 0.8rem;
   }
 
   .menu-button-container {

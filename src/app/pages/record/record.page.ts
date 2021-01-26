@@ -9,7 +9,7 @@ import { Observable, timer } from 'rxjs';
 import Recorder from 'recorder-js';
 import { shareReplay, withLatestFrom } from 'rxjs/operators';
 @Component({
-  selector: 'app-record',
+  selector: 'er-record',
   templateUrl: 'record.page.html',
   styleUrls: ['record.page.scss']
 })

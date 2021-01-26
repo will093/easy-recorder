@@ -1,8 +1,8 @@
 <!-- Workaround for back button (https://stackoverflow.com/questions/63005305/ion-back-button-is-not-showing-up-in-toolbar-in-ionic-5) -->
 <ion-header>
-  <app-header>
+  <er-header>
     <ion-back-button></ion-back-button>
-  </app-header>  
+  </er-header>  
 </ion-header>
 
 <ion-content padding>
@@ -12,7 +12,7 @@
   </div>
 </ion-content>
 
-<app-footer>
+<er-footer>
   <ng-container *ngIf="currentStatus === recorderStatuses.NotStarted">
     <ion-button shape="round" color="tertiary" tappable (click)="startRecord()">
       <ion-icon name="ellipse"></ion-icon>
@@ -29,4 +29,4 @@
       Cancel
     </ion-button>
   </ng-container>
-</app-footer>
+</er-footer>

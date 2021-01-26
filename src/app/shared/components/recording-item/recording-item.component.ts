@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { Media } from '../../models/media.model';
 
 @Component({
-  selector: 'app-recording-item',
+  selector: 'er-recording-item',
   templateUrl: './recording-item.component.html',
   styleUrls: ['./recording-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

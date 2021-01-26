@@ -8,7 +8,7 @@ import { NavController } from '@ionic/angular';
 import moment from 'moment';
 
 @Component({
-  selector: 'app-recordings-list',
+  selector: 'er-recordings-list',
   templateUrl: 'recordings-list.page.html',
   styleUrls: ['recordings-list.page.scss'],
 })
